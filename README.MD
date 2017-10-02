@@ -15,12 +15,3 @@ npm i @types/express @types/body-parser @types/morgan -D
 npm i sequelize sequelize-cli -S
 npm i sequelize @types/sequelize -D
 ```
-
-## Conteúdos dos arquivos utilizados no passo a passo do projeto
-
-### Arquivos de configuração da aplicação
-#### tsconfig.json
-
-```
-
-```
