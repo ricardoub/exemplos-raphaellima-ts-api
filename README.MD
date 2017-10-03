@@ -1,13 +1,15 @@
 # API - NODE - TYPESCRIPT - EXPRESS - POSTGRESQL - SEQUELIZE
 
-## Criação do projeto
+## Passo a passo de execução do curso
+### Criação do projeto
+Clonamos um repositório recem criado e vazio, desta maneira já adiciona o remote e iniciamos o projeto Node.
 ```
 git clone https://github.com/ricardoub/exemplos-raphaellima-ts-api.git ts-api && cd ts-api
 npm init
-
 ```
 
-## Dependencias de projeto
+### Dependencias de projeto
+Instalamos as seguintes dependencias, na ordem necessária de instalação vista durante o curso
 ```
 npm i body-parser express http morgan pg -S
 npm i ts-node -D
