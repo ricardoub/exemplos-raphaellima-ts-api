@@ -2,8 +2,33 @@ import { app, request, expect } from './config/helpers';
 
 describe('Testes de integração', () => {
 
+  describe('GET /', () => {
+    it('Deve retornar a mensagem Hello, world!', done => {
+      request(app)
+        .get('/')
+        .end((error, res) => {
+          expect(res.status).to.equal(200);
+          expect(res.text).to.be.eql('Hello, world!');
+          done(error);
+        })
+    });
+  });
+
+  describe('GET /ola/:nome', () => {
+    it('Deve retornar a mensagem TypeScript Course!', done => {
+      const nome = 'TypeScript Course';
+      request(app)
+        .get(`/ola/${nome}`)
+        .end((error, res) => {
+          expect(res.status).to.equal(200);
+          expect(res.text).to.be.eql('Hello, TypeScript Course!');
+          done(error);
+        })
+    });
+  });
+
   describe('GET /api/users/all', () => {
-    it('Deve retornar um JSOn com todos os usuários', done => {
+    it('Deve retornar um JSON com todos os usuários', done => {
       request(app)
         .get('/api/users/all')
         .end((error, res) => {
@@ -13,7 +38,7 @@ describe('Testes de integração', () => {
   });
 
   describe('GET /api/users/:id', () => {
-    it('Deve retornar um JSOn com apenas um usuário', done => {
+    it('Deve retornar um JSON com apenas um usuário', done => {
       request(app)
         .get(`/api/users/${1}`)
         .end((error, res) => {
@@ -42,27 +67,21 @@ describe('Testes de integração', () => {
         nome: 'TesteUpdate'
       }
       request(app)
-        .post(`/api/users/${1}/edit`)
+        .put(`/api/users/${1}/edit`)
         .send(user)
         .end((error, res) => {
           expect(res.status).to.equal(200);
         })
-
     });
   });
 
   describe('DELETE /api/users/:id', () => {
     it('Deve deletar um usuário', done => {
-      const user = {
-        nome: 'Teste'
-      }
       request(app)
         .put(`/api/users/${1}`)
-        .send(user)
         .end((error, res) => {
           expect(res.status).to.equal(200);
         })
-
     });
   });
 
