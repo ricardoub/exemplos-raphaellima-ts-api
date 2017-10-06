@@ -1,5 +1,5 @@
 "use strict";
-exports.__esModule = true;
+Object.defineProperty(exports, "__esModule", { value: true });
 var express = require("express");
 var morgan = require("morgan");
 var bodyParser = require("body-parser");
@@ -18,8 +18,8 @@ var Api = (function () {
         this.router(this.express);
     };
     Api.prototype.router = function (app) {
-        new routes_1["default"](app);
+        new routes_1.default(app);
     };
     return Api;
 }());
-exports["default"] = new Api().express;
+exports.default = new Api().express;
