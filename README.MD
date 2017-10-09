@@ -18,4 +18,6 @@ npm i -g sequelize sequelize-cli -S
 npm i sequelize @types/sequelize -D
 npm i mocha chai supertest testdouble -D
 npm i @types/mocha @types/chai @types/supertest -D
+npm i http-status -S
+npm i @types/http-status -D
 ```
