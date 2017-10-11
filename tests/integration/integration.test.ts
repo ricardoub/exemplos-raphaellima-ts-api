@@ -3,6 +3,10 @@ import { app, request, expect } from './config/helpers';
 
 describe('Testes de integração', () => {
 
+  'use strict';
+  const config = require('../../server/config/env/config')();
+  const model = require('../../server/models');
+
   describe('GET /api/users/all', () => {
     it('Deve retornar um JSON com todos os usuários', done => {
       request(app)

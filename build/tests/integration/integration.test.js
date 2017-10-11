@@ -3,6 +3,9 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var HTTPStatus = require("http-status");
 var helpers_1 = require("./config/helpers");
 describe('Testes de integração', function () {
+    'use strict';
+    var config = require('../../server/config/env/config')();
+    var model = require('../../server/models');
     describe('GET /api/users/all', function () {
         it('Deve retornar um JSON com todos os usuários', function (done) {
             helpers_1.request(helpers_1.app)
