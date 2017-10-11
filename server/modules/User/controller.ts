@@ -1,5 +1,6 @@
 import { Request, Response } from 'express';
 import * as HTTPStatus from 'http-status';
+
 class UserController {
 
   constructor(){}

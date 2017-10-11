@@ -6,6 +6,33 @@ describe('Testes de integração', function () {
     'use strict';
     var config = require('../../server/config/env/config')();
     var model = require('../../server/models');
+    var id;
+    var userTest = {
+        id: 100,
+        name: 'Usuário Teste',
+        email: 'teste@email.com',
+        password: 'teste'
+    };
+    var userDefault = {
+        id: 1,
+        name: 'Default User',
+        email: 'default@email.com',
+        password: 'default'
+    };
+    beforeEach(function (done) {
+        model.User.destroy({
+            where: {}
+        })
+            .then(function () {
+            return model.User.create(userDefault);
+        })
+            .then(function (user) {
+            model.User.create(userTest)
+                .then(function () {
+                done();
+            });
+        });
+    });
     describe('GET /api/users/all', function () {
         it('Deve retornar um JSON com todos os usuários', function (done) {
             helpers_1.request(helpers_1.app)
