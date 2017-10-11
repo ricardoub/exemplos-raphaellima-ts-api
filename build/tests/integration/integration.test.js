@@ -99,13 +99,11 @@ describe('Testes de integração', function () {
     });
     describe('DELETE /api/users/:id/destroy', function () {
         it('Deve deletar um usuário', function (done) {
-            var user = {
-                nome: 'Teste'
-            };
             helpers_1.request(helpers_1.app)
                 .delete("/api/users/" + 1 + "/destroy")
                 .end(function (error, res) {
                 helpers_1.expect(res.status).to.equal(HTTPStatus.OK);
+                helpers_1.expect(res.body.payload).to.eql(1);
                 done(error);
             });
         });
