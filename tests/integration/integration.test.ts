@@ -53,11 +53,16 @@ describe('Testes de integração', () => {
   });
 
   describe('GET /api/users/:id', () => {
-    it('Deve retornar um JSON com apenas um usuário', done => {
+    it('Deve retornar um Array com apenas um usuário', done => {
       request(app)
-        .get(`/api/users/${1}`)
+        .get(`/api/users/${userDefault.id}`)
         .end((error, res) => {
           expect(res.status).to.equal(HTTPStatus.OK);
+          expect(res.body.payload.id).to.be.equal(userDefault.id);
+          expect(res.body.payload).to.have.all.keys([
+            'id', 'name', 'email', 'password'
+          ]);
+          id = res.body.payload.id;
           done(error);
         })
     });
@@ -79,7 +84,6 @@ describe('Testes de integração', () => {
           expect(res.body.payload.id).to.be.eql(user.id);
           expect(res.body.payload.name).to.be.eql(user.name);
           expect(res.body.payload.email).to.be.eql(user.email);
-
           done(error);
         })
     });

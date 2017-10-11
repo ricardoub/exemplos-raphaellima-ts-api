@@ -47,11 +47,16 @@ describe('Testes de integração', function () {
         });
     });
     describe('GET /api/users/:id', function () {
-        it('Deve retornar um JSON com apenas um usuário', function (done) {
+        it('Deve retornar um Array com apenas um usuário', function (done) {
             helpers_1.request(helpers_1.app)
-                .get("/api/users/" + 1)
+                .get("/api/users/" + userDefault.id)
                 .end(function (error, res) {
                 helpers_1.expect(res.status).to.equal(HTTPStatus.OK);
+                helpers_1.expect(res.body.payload.id).to.be.equal(userDefault.id);
+                helpers_1.expect(res.body.payload).to.have.all.keys([
+                    'id', 'name', 'email', 'password'
+                ]);
+                id = res.body.payload.id;
                 done(error);
             });
         });
