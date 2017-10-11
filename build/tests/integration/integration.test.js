@@ -59,13 +59,19 @@ describe('Testes de integração', function () {
     describe('POST /api/users/create', function () {
         it('Deve criar um usuário', function (done) {
             var user = {
-                nome: 'Teste'
+                id: 2,
+                name: 'Usuario Teste',
+                email: 'usuario@email.com',
+                password: 'novouser'
             };
             helpers_1.request(helpers_1.app)
                 .post("/api/users/create")
                 .send(user)
                 .end(function (error, res) {
                 helpers_1.expect(res.status).to.equal(HTTPStatus.OK);
+                helpers_1.expect(res.body.payload.id).to.be.eql(user.id);
+                helpers_1.expect(res.body.payload.name).to.be.eql(user.name);
+                helpers_1.expect(res.body.payload.email).to.be.eql(user.email);
                 done(error);
             });
         });
