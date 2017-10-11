@@ -34,11 +34,14 @@ describe('Testes de integração', function () {
         });
     });
     describe('GET /api/users/all', function () {
-        it('Deve retornar um JSON com todos os usuários', function (done) {
+        it('Deve retornar um Array com todos os usuários', function (done) {
             helpers_1.request(helpers_1.app)
                 .get('/api/users/all')
                 .end(function (error, res) {
                 helpers_1.expect(res.status).to.equal(HTTPStatus.OK);
+                helpers_1.expect(res.body.payload).to.be.an('array');
+                helpers_1.expect(res.body.payload[0].name).to.be.equal(userDefault.name);
+                helpers_1.expect(res.body.payload[0].email).to.be.equal(userDefault.email);
                 done(error);
             });
         });
