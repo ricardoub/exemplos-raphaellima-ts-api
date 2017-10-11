@@ -84,13 +84,15 @@ describe('Testes de integração', function () {
     describe('PUT /api/users/:id/update', function () {
         it('Deve atualizar um usuário', function (done) {
             var user = {
-                nome: 'TesteUpdate'
+                name: 'TestUpdate',
+                email: 'update@email.com'
             };
             helpers_1.request(helpers_1.app)
-                .put("/api/users/" + 1 + "/update")
+                .put("/api/users/" + userTest.id + "/update")
                 .send(user)
                 .end(function (error, res) {
                 helpers_1.expect(res.status).to.equal(HTTPStatus.OK);
+                helpers_1.expect(res.body.payload[0]).to.be.eql(1);
                 done(error);
             });
         });

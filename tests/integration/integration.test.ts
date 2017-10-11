@@ -92,13 +92,15 @@ describe('Testes de integração', () => {
   describe('PUT /api/users/:id/update', () => {
     it('Deve atualizar um usuário', done => {
       const user = {
-        nome: 'TesteUpdate'
+        name: 'TestUpdate',
+        email: 'update@email.com'
       }
       request(app)
-        .put(`/api/users/${1}/update`)
+        .put(`/api/users/${userTest.id}/update`)
         .send(user)
         .end((error, res) => {
           expect(res.status).to.equal(HTTPStatus.OK);
+          expect(res.body.payload[0]).to.be.eql(1)
           done(error);
         })
     });
