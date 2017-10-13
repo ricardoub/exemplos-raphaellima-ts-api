@@ -100,7 +100,7 @@ describe('Testes de integração', () => {
         .send(user)
         .end((error, res) => {
           expect(res.status).to.equal(HTTPStatus.OK);
-          expect(res.body.payload[0]).to.be.eql(1)
+          expect(res.body.payload[0]).to.be.eql(1);
           done(error);
         })
     });
