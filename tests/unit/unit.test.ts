@@ -51,15 +51,28 @@ describe('Testes unitários do controller', () => {
   //   });
   // });
 
-  describe('USUÁRIO: Método Delete', () => {
-    it('Deve deletar um Usuário', () => {
+  describe('USUÁRIO: Método getById', () => {
+    it('Deve retornar um usuário de acordo com o ID passado', () => {
       const user = new User();
       return user
-        .delete(1)
+        .getById(1)
         .then(data => {
-          expect(data).to.be.equal(1);
-        })
+          expect(data).to.have.all.keys(
+            ['email', 'id', 'name', 'password']
+          )
+        });
     });
   });
+
+  // describe('USUÁRIO: Método Delete', () => {
+  //   it('Deve deletar um Usuário', () => {
+  //     const user = new User();
+  //     return user
+  //       .delete(1)
+  //       .then(data => {
+  //         expect(data).to.be.equal(1);
+  //       })
+  //   });
+  // });
 
 });
