@@ -36,25 +36,30 @@ describe('Testes unitários do controller', () => {
   //   });
   // });
 
-  describe('USUÁRIO: Método Update', () => {
-    it('Deve atualizar um Usuário', () => {
-      const usuarioAtualizado = {
-        name: 'Nome Atualizado',
-        email: 'atualizado@gmail.com'
-      };
+  // describe('USUÁRIO: Método Update', () => {
+  //   it('Deve atualizar um Usuário', () => {
+  //     const usuarioAtualizado = {
+  //       name: 'Nome Atualizado',
+  //       email: 'atualizado@gmail.com'
+  //     };
+  //     const user = new User();
+  //     return user
+  //       .update(1, usuarioAtualizado)
+  //       .then(data => {
+  //         expect(data[0]).to.be.equal(1);
+  //       })
+  //   });
+  // });
+
+  describe('USUÁRIO: Método Delete', () => {
+    it('Deve deletar um Usuário', () => {
       const user = new User();
       return user
-        .update(1, usuarioAtualizado)
+        .delete(1)
         .then(data => {
-          expect(data[0]).to.be.equal(1);
+          expect(data).to.be.equal(1);
         })
     });
   });
-
-  // describe('USUÁRIO: Método Delete', () => {
-  //   it('Deve deletar um Usuário', () => {
-  //
-  //   });
-  // });
 
 });

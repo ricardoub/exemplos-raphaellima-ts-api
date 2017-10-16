@@ -34,23 +34,28 @@ describe('Testes unitários do controller', function () {
     //       })
     //   });
     // });
-    describe('USUÁRIO: Método Update', function () {
-        it('Deve atualizar um Usuário', function () {
-            var usuarioAtualizado = {
-                name: 'Nome Atualizado',
-                email: 'atualizado@gmail.com'
-            };
+    // describe('USUÁRIO: Método Update', () => {
+    //   it('Deve atualizar um Usuário', () => {
+    //     const usuarioAtualizado = {
+    //       name: 'Nome Atualizado',
+    //       email: 'atualizado@gmail.com'
+    //     };
+    //     const user = new User();
+    //     return user
+    //       .update(1, usuarioAtualizado)
+    //       .then(data => {
+    //         expect(data[0]).to.be.equal(1);
+    //       })
+    //   });
+    // });
+    describe('USUÁRIO: Método Delete', function () {
+        it('Deve deletar um Usuário', function () {
             var user = new service_1.default();
             return user
-                .update(1, usuarioAtualizado)
+                .delete(1)
                 .then(function (data) {
-                helpers_1.expect(data[0]).to.be.equal(1);
+                helpers_1.expect(data).to.be.equal(1);
             });
         });
     });
-    // describe('USUÁRIO: Método Delete', () => {
-    //   it('Deve deletar um Usuário', () => {
-    //
-    //   });
-    // });
 });
