@@ -18,8 +18,14 @@ var UserController = (function () {
         });
     };
     UserController.prototype.getById = function (req, res) {
-        res.status(HTTPStatus.OK).json({
-            message: 'OK'
+        var userId = parseInt(req.params.id);
+        this.UserService.getById(userId)
+            .then(function (data) {
+            res.status(HTTPStatus.OK).json({ payload: data });
+        })
+            .catch(function (err) {
+            res.status(HTTPStatus.INTERNAL_SERVER_ERROR)
+                .json({ payload: 'Erro ao buscar usuário' });
         });
     };
     UserController.prototype.createUser = function (req, res) {
