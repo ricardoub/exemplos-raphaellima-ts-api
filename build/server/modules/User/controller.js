@@ -40,8 +40,16 @@ var UserController = (function () {
         });
     };
     UserController.prototype.updateUser = function (req, res) {
-        res.status(HTTPStatus.OK).json({
-            message: 'OK'
+        var userId = parseInt(req.params.id);
+        var props = req.body;
+        this.UserService.update(userId, props)
+            .then(function (data) {
+            res.status(HTTPStatus.OK)
+                .json({ payload: data });
+        })
+            .catch(function (err) {
+            res.status(HTTPStatus.INTERNAL_SERVER_ERROR)
+                .json({ payload: 'Erro ao atualizar usuário' });
         });
     };
     UserController.prototype.deleteUser = function (req, res) {
