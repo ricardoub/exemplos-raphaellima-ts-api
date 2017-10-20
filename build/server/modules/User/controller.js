@@ -23,8 +23,14 @@ var UserController = (function () {
         });
     };
     UserController.prototype.createUser = function (req, res) {
-        res.status(HTTPStatus.OK).json({
-            message: 'OK'
+        this.UserService
+            .create(req.body)
+            .then(function (data) {
+            res.status(HTTPStatus.OK).json({ payload: data });
+        })
+            .catch(function (err) {
+            res.status(HTTPStatus.OK)
+                .json({ payload: 'Erro ao cadastrar novo usuário' });
         });
     };
     UserController.prototype.updateUser = function (req, res) {

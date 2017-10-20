@@ -29,9 +29,15 @@ class UserController {
   }
 
   createUser(req: Request, res: Response) {
-    res.status(HTTPStatus.OK).json({
-      message: 'OK'
-    });
+    this.UserService
+      .create(req.body)
+      .then(data => {
+        res.status(HTTPStatus.OK).json({payload: data});
+      })
+      .catch(err => {
+        res.status(HTTPStatus.OK)
+          .json({payload: 'Erro ao cadastrar novo usuário'});
+      })
   }
 
   updateUser(req: Request, res: Response) {
