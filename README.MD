@@ -21,5 +21,6 @@ npm i @types/mocha @types/chai @types/supertest -D
 npm i http-status -S
 npm i @types/http-status -D
 npm i bluebird -S
-npm i @types/bluebird@ts2.2 -D 
+npm i @types/bluebird@ts2.2 -D
+npm i lodash -S
 ```
