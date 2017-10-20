@@ -1,5 +1,10 @@
 import { Request, Response } from 'express';
 import * as HTTPStatus from 'http-status';
+import * as _ from 'lodash';
+
+import { onError } from '../../api/responses/errorHandler';
+import { onSuccess } from '../../api/responses/successHandler';
+import { dbErrorHandler } from '../../config/dbErrorHandler';
 import User from './service';
 
 class UserController {
@@ -11,66 +16,38 @@ class UserController {
   }
 
   getAll(req: Request, res: Response) {
-    this.UserService
-      .getAll()
-      .then(data => {
-        res.status(HTTPStatus.OK).json({payload: data});
-      })
-      .catch(err => {
-        res.status(HTTPStatus.INTERNAL_SERVER_ERROR)
-          .json({payload: 'Erro ao buscar todos usuários'});
-      });
+    this.UserService.getAll()
+      .then(_.partial(onSuccess, res))
+      .catch(_.partial(onError, res, 'Erro ao buscar todos os usuários'));
   }
 
   getById(req: Request, res: Response) {
     const userId = parseInt(req.params.id);
     this.UserService.getById(userId)
-      .then(data => {
-        res.status(HTTPStatus.OK).json({payload: data});
-      })
-      .catch(err => {
-        res.status(HTTPStatus.INTERNAL_SERVER_ERROR)
-          .json({payload: 'Erro ao buscar usuário'});
-      })
+      .then(_.partial(onSuccess, res))
+      .catch(_.partial(onError, res, 'Usuário encontrado'))
   }
 
   createUser(req: Request, res: Response) {
-    this.UserService
-      .create(req.body)
-      .then(data => {
-        res.status(HTTPStatus.OK).json({payload: data});
-      })
-      .catch(err => {
-        res.status(HTTPStatus.OK)
-          .json({payload: 'Erro ao cadastrar novo usuário'});
-      })
+    this.UserService.create(req.body)
+      .then(_.partial(onSuccess, res))
+      .catch(_.partial(dbErrorHandler, res))
+      .catch(_.partial(onError, res, 'Erro ao inserir novo usuárip'))
   }
 
   updateUser(req: Request, res: Response) {
     const userId = parseInt(req.params.id);
     const props = req.body;
     this.UserService.update(userId, props)
-      .then(data => {
-        res.status(HTTPStatus.OK)
-          .json({payload: data});
-      })
-      .catch(err => {
-        res.status(HTTPStatus.INTERNAL_SERVER_ERROR)
-          .json({payload: 'Erro ao atualizar usuário'});
-      })
+      .then(_.partial(onSuccess, res))
+      .catch(_.partial(onError, res, 'Falha ao atualizar usuário'))
   }
 
   deleteUser(req: Request, res: Response) {
     const userId = parseInt(req.params.id);
     this.UserService.delete(userId)
-      .then(data => {
-        res.status(HTTPStatus.OK)
-          .json({payload: data});
-      })
-      .catch(err => {
-        res.status(HTTPStatus.INTERNAL_SERVER_ERROR)
-          .json({payload: 'Erro ao excluir usuário'});
-      })
+      .then(_.partial(onSuccess, res))
+      .catch(_.partial(onError, res, 'Erro ao excluir usuário'))
   }
 
 }
