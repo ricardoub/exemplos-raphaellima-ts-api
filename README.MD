@@ -23,4 +23,5 @@ npm i @types/http-status -D
 npm i bluebird -S
 npm i @types/bluebird@ts2.2 -D
 npm i lodash -S
+npm i @types/lodash -D
 ```
