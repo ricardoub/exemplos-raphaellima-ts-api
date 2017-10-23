@@ -32,7 +32,7 @@ class UserController {
     this.UserService.create(req.body)
       .then(_.partial(onSuccess, res))
       .catch(_.partial(dbErrorHandler, res))
-      .catch(_.partial(onError, res, 'Erro ao inserir novo usuárip'))
+      .catch(_.partial(onError, res, 'Erro ao inserir novo usuário'))
   }
 
   updateUser(req: Request, res: Response) {

@@ -24,7 +24,7 @@ var UserController = (function () {
         this.UserService.create(req.body)
             .then(_.partial(successHandler_1.onSuccess, res))
             .catch(_.partial(dbErrorHandler_1.dbErrorHandler, res))
-            .catch(_.partial(errorHandler_1.onError, res, 'Erro ao inserir novo usuárip'));
+            .catch(_.partial(errorHandler_1.onError, res, 'Erro ao inserir novo usuário'));
     };
     UserController.prototype.updateUser = function (req, res) {
         var userId = parseInt(req.params.id);
