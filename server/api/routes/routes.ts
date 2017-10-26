@@ -1,6 +1,6 @@
 import { Application, Request, Response } from 'express';
 import UserRoutes from '../../modules/User/routes';
-import TokenRoutes from '../../modules/auth/auth';
+//import TokenRoutes from '../../modules/auth/auth';
 
 class Routes {
 
@@ -10,7 +10,7 @@ class Routes {
 
   constructor(app: Application, auth: any) {
     this.router = new UserRoutes();
-    this.tokenRoute = new TokenRoutes();
+    //this.tokenRoute = new TokenRoutes();
     this.auth = auth;
     this.getRoutes(app);
   }
@@ -28,7 +28,7 @@ class Routes {
       .all(this.auth.autenticate).put(this.router.update);
     app.route('/api/users/:id/destroy')
       .all(this.auth.autenticate).delete(this.router.destroy);
-      
+
     app.route('/token').post(this.tokenRoute.auth);
   }
 

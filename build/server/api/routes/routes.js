@@ -1,11 +1,11 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 var routes_1 = require("../../modules/User/routes");
-var auth_1 = require("../../modules/auth/auth");
+//import TokenRoutes from '../../modules/auth/auth';
 var Routes = (function () {
     function Routes(app, auth) {
         this.router = new routes_1.default();
-        this.tokenRoute = new auth_1.default();
+        //this.tokenRoute = new TokenRoutes();
         this.auth = auth;
         this.getRoutes(app);
     }
