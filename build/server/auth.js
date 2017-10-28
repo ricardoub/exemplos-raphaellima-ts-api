@@ -8,7 +8,8 @@ function AuthConfig() {
     var UserService = new service_1.default();
     var opts = {
         secretOrKey: config.secret,
-        jwtFromRequest: passport_jwt_1.ExtractJwt.fromAuthHeader()
+        //jwtFromRequest: ExtractJwt.fromAuthHeader()
+        jwtFromRequest: passport_jwt_1.ExtractJwt.fromAuthHeaderAsBearerToken()
     };
     passport.use(new passport_jwt_1.Strategy(opts, function (jwtPayload, done) {
         UserService
