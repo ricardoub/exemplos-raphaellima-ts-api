@@ -18,15 +18,17 @@ WITH (
 ALTER TABLE "Users"
   OWNER TO postgres;
 
+
 -- Sequence: "Users_id_seq"
 
 -- DROP SEQUENCE "Users_id_seq";
 
 CREATE SEQUENCE "Users_id_seq"
   INCREMENT 1
-  MINVALUE 1
+  MINVALUE 0
   MAXVALUE 9223372036854775807
   START 0
   CACHE 1;
 ALTER TABLE "Users_id_seq"
   OWNER TO postgres;
+
