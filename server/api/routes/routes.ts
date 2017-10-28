@@ -30,7 +30,7 @@ class Routes {
       .all(this.auth.autenticate()).delete(this.router.destroy);
 
     app.route('/token').post(this.tokenRoute.auth);
-  }
+  } 
 
 }
 
