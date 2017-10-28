@@ -12,6 +12,6 @@ export default function authSuccess(res: Response, credentials: any, data: any) 
       token: jwt.encode(payload, config.secret)
     });
   } else {
-    res.status(httpStatus.UNAUTHORIZED);
+    res.sendStatus(HttpStatus.UNAUTHORIZED);
   }
 }

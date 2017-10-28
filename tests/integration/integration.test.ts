@@ -38,6 +38,39 @@ describe('Testes de integração', () => {
     })
   });
 
+  describe('POST /token', () => {
+    it('Deve receber um JWT', done => {
+      const credentials = {
+        email: userDefault.email,
+        password: userDefault.password
+      };
+      request(app)
+        .post('/token')
+        .send(credentials)
+        .end((error, res) => {
+          expect(res.status).to.equal(HTTPStatus.OK);
+          expect(res.body.token).to.equal(`${token}`);
+          done(error);
+        });
+    });
+
+    it('Não deve gerar Token', done => {
+      const credentials = {
+        email: 'invalido@email.com',
+        password: 'invalido'
+      };
+      request(app)
+        .post('/token')
+        .send(credentials)
+        .end((error, res) => {
+          expect(res.status).to.equal(HTTPStatus.UNAUTHORIZED);
+          expect(res.body).to.empty;
+          done(error);
+        })
+
+    })
+  })
+
   describe('GET /api/users/all', () => {
     it('Deve retornar um Array com todos os usuários', done => {
       request(app)

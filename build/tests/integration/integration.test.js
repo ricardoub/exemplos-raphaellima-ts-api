@@ -33,6 +33,36 @@ describe('Testes de integração', function () {
             });
         });
     });
+    describe('POST /token', function () {
+        it('Deve receber um JWT', function (done) {
+            var credentials = {
+                email: userDefault.email,
+                password: userDefault.password
+            };
+            helpers_1.request(helpers_1.app)
+                .post('/token')
+                .send(credentials)
+                .end(function (error, res) {
+                helpers_1.expect(res.status).to.equal(HTTPStatus.OK);
+                helpers_1.expect(res.body.token).to.equal("" + token);
+                done(error);
+            });
+        });
+        it('Não deve gerar Token', function (done) {
+            var credentials = {
+                email: 'invalido@email.com',
+                password: 'invalido'
+            };
+            helpers_1.request(helpers_1.app)
+                .post('/token')
+                .send(credentials)
+                .end(function (error, res) {
+                helpers_1.expect(res.status).to.equal(HTTPStatus.UNAUTHORIZED);
+                helpers_1.expect(res.body).to.empty;
+                done(error);
+            });
+        });
+    });
     describe('GET /api/users/all', function () {
         it('Deve retornar um Array com todos os usuários', function (done) {
             helpers_1.request(helpers_1.app)
