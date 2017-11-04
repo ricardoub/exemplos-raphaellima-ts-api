@@ -27,4 +27,5 @@ npm i @types/lodash -D
 npm i jwt-simple passport passport-jwt -S
 npm i @types/jwt-simple @types/passport @types/passport-jwt -D
 npm i bcrypt -S
+npm i istanbul nyc -D
 ```
