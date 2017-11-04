@@ -20,9 +20,9 @@ describe('Testes de integração', () => {
 
   const userDefault = {
     id: 1,
-    name: 'Default User',
-    email: 'default@email.com',
-    password: 'default'
+    name: 'Raphael',
+    email: 'raphael@email.com',
+    password: '123'
   }
 
   beforeEach((done) => {
@@ -35,7 +35,7 @@ describe('Testes de integração', () => {
     .then(user => {
       model.User.create(userTest)
         .then(() => {
-          token = jwt.encode({id: user.id}, config.secret)
+          token = jwt.encode({id: user.id}, config.secret);
           done();
         })
     })
@@ -80,7 +80,7 @@ describe('Testes de integração', () => {
       request(app)
         .get('/api/users/all')
         .set('Content-Type', 'application/json')
-        .set('Autorization', `JWT ${token}`)
+        .set('Authorization', `JWT ${token}`)
         .end((error, res) => {
           expect(res.status).to.equal(HTTPStatus.OK);
           expect(res.body.payload).to.be.an('array');
@@ -91,78 +91,78 @@ describe('Testes de integração', () => {
     });
   });
 
-  // describe('GET /api/users/:id', () => {
-  //   it('Deve retornar um Array com apenas um usuário', done => {
-  //     request(app)
-  //       .get(`/api/users/${userDefault.id}`)
-  //       .set('Content-Type', 'application/json')
-  //       .set('Autorization', `JWT ${token}`)
-  //       .end((error, res) => {
-  //         expect(res.status).to.equal(HTTPStatus.OK);
-  //         expect(res.body.payload.id).to.be.equal(userDefault.id);
-  //         expect(res.body.payload).to.have.all.keys([
-  //           'id', 'name', 'email', 'password'
-  //         ]);
-  //         id = res.body.payload.id;
-  //         done(error);
-  //       })
-  //   });
-  // });
-  //
-  // describe('POST /api/users/create', () => {
-  //   it('Deve criar um usuário', done => {
-  //     const user = {
-  //       id: 2,
-  //       name: 'Usuario Teste',
-  //       email: 'usuario@email.com',
-  //       password: 'novouser'
-  //     }
-  //     request(app)
-  //       .post(`/api/users/create`)
-  //       .set('Content-Type', 'application/json')
-  //       .set('Autorization', `JWT ${token}`)
-  //       .send(user)
-  //       .end((error, res) => {
-  //         expect(res.status).to.equal(HTTPStatus.OK);
-  //         expect(res.body.payload.id).to.be.eql(user.id);
-  //         expect(res.body.payload.name).to.be.eql(user.name);
-  //         expect(res.body.payload.email).to.be.eql(user.email);
-  //         done(error);
-  //       })
-  //   });
-  // });
-  //
-  // describe('PUT /api/users/:id/update', () => {
-  //   it('Deve atualizar um usuário', done => {
-  //     const user = {
-  //       name: 'TestUpdate',
-  //       email: 'update@email.com'
-  //     }
-  //     request(app)
-  //       .put(`/api/users/${userTest.id}/update`)
-  //       .set('Content-Type', 'application/json')
-  //       .set('Autorization', `JWT ${token}`)
-  //       .send(user)
-  //       .end((error, res) => {
-  //         expect(res.status).to.equal(HTTPStatus.OK);
-  //         expect(res.body.payload[0]).to.be.eql(1);
-  //         done(error);
-  //       })
-  //   });
-  // });
-  //
-  // describe('DELETE /api/users/:id/destroy', () => {
-  //   it('Deve deletar um usuário', done => {
-  //     request(app)
-  //       .delete(`/api/users/${1}/destroy`)
-  //       .set('Content-Type', 'application/json')
-  //       .set('Autorization', `JWT ${token}`)
-  //       .end((error, res) => {
-  //         expect(res.status).to.equal(HTTPStatus.OK);
-  //         expect(res.body.payload).to.eql(1);
-  //         done(error);
-  //       })
-  //   });
-  // });
+  describe('GET /api/users/:id', () => {
+    it('Deve retornar um Array com apenas um usuário', done => {
+      request(app)
+        .get(`/api/users/${userDefault.id}`)
+        .set('Content-Type', 'application/json')
+        .set('Authorization', `JWT ${token}`)
+        .end((error, res) => {
+          expect(res.status).to.equal(HTTPStatus.OK);
+          expect(res.body.payload.id).to.be.equal(userDefault.id);
+          expect(res.body.payload).to.have.all.keys([
+            'id', 'name', 'email', 'password'
+          ]);
+          id = res.body.payload.id;
+          done(error);
+        })
+    });
+  });
+
+  describe('POST /api/users/create', () => {
+    it('Deve criar um usuário', done => {
+      const user = {
+        id: 2,
+        name: 'Usuario Teste',
+        email: 'usuario@email.com',
+        password: 'novouser'
+      }
+      request(app)
+        .post(`/api/users/create`)
+        .set('Content-Type', 'application/json')
+        .set('Authorization', `JWT ${token}`)
+        .send(user)
+        .end((error, res) => {
+          expect(res.status).to.equal(HTTPStatus.OK);
+          expect(res.body.payload.id).to.be.eql(user.id);
+          expect(res.body.payload.name).to.be.eql(user.name);
+          expect(res.body.payload.email).to.be.eql(user.email);
+          done(error);
+        })
+    });
+  });
+
+  describe('PUT /api/users/:id/update', () => {
+    it('Deve atualizar um usuário', done => {
+      const user = {
+        name: 'TestUpdate',
+        email: 'update@email.com'
+      }
+      request(app)
+        .put(`/api/users/${userTest.id}/update`)
+        .set('Content-Type', 'application/json')
+        .set('Authorization', `JWT ${token}`)
+        .send(user)
+        .end((error, res) => {
+          expect(res.status).to.equal(HTTPStatus.OK);
+          expect(res.body.payload[0]).to.be.eql(1);
+          done(error);
+        })
+    });
+  });
+
+  describe('DELETE /api/users/:id/destroy', () => {
+    it('Deve deletar um usuário', done => {
+      request(app)
+        .delete(`/api/users/${1}/destroy`)
+        .set('Content-Type', 'application/json')
+        .set('Authorization', `JWT ${token}`)
+u                 .end((error, res) => {
+          expect(res.status).to.equal(HTTPStatus.OK);
+          expect(res.body.payload).to.eql(1);
+          done(error);
+        })
+    });
+  });
 
 });
