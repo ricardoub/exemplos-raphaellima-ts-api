@@ -4,29 +4,24 @@ import TokenRoutes from '../../modules/auth/auth';
 
 class Routes {
 
-  private router: UserRoutes;
-  private tokenRoute;
-
   constructor() {
-    this.router = new UserRoutes();
-    this.tokenRoute = TokenRoutes;
   }
 
   initRoutes(app: Application, auth: any): void {
     // app.route('/').get((req: Request, res: Response) => res.send('Hello, world!'));
     // app.route('/ola/:nome').get((req: Request, res: Response) => res.send(`Hello, ${req.params.nome}!`));
     app.route('/api/users/all')
-      .all(auth.config().autenticate()).get(this.router.index);
+      .all(auth.config().autenticate()).get(UserRoutes.index);
     app.route('/api/users/create')
-      .all(auth.config().autenticate()).post(this.router.create);
+      .all(auth.config().autenticate()).post(UserRoutes.create);
     app.route('/api/users/:id')
-      .all(auth.config().autenticate()).get(this.router.findOne);
+      .all(auth.config().autenticate()).get(UserRoutes.findOne);
     app.route('/api/users/:id/update')
-      .all(auth.config().autenticate()).put(this.router.update);
+      .all(auth.config().autenticate()).put(UserRoutes.update);
     app.route('/api/users/:id/destroy')
-      .all(auth.config().autenticate()).delete(this.router.destroy);
+      .all(auth.config().autenticate()).delete(UserRoutes.destroy);
 
-    app.route('/token').post(this.tokenRoute.auth);
+    app.route('/token').post(TokenRoutes.auth);
   }
 
 }

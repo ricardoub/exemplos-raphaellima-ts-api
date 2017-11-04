@@ -22,4 +22,4 @@ var UserRoutes = (function () {
     };
     return UserRoutes;
 }());
-exports.default = UserRoutes;
+exports.default = new UserRoutes();
