@@ -9,27 +9,23 @@ import User from './service';
 
 class UserController {
 
-  private UserService: User;
-
-  constructor(){
-    this.UserService = new User();
-  }
+  constructor(){}
 
   getAll(req: Request, res: Response) {
-    this.UserService.getAll()
+    User.getAll()
       .then(_.partial(onSuccess, res))
       .catch(_.partial(onError, res, 'Erro ao buscar todos os usuários'));
   }
 
   getById(req: Request, res: Response) {
     const userId = parseInt(req.params.id);
-    this.UserService.getById(userId)
+    User.getById(userId)
       .then(_.partial(onSuccess, res))
       .catch(_.partial(onError, res, 'Usuário encontrado'))
   }
 
   createUser(req: Request, res: Response) {
-    this.UserService.create(req.body)
+    User.create(req.body)
       .then(_.partial(onSuccess, res))
       .catch(_.partial(dbErrorHandler, res))
       .catch(_.partial(onError, res, 'Erro ao inserir novo usuário'))
@@ -38,14 +34,14 @@ class UserController {
   updateUser(req: Request, res: Response) {
     const userId = parseInt(req.params.id);
     const props = req.body;
-    this.UserService.update(userId, props)
+    User.update(userId, props)
       .then(_.partial(onSuccess, res))
       .catch(_.partial(onError, res, 'Falha ao atualizar usuário'))
   }
 
   deleteUser(req: Request, res: Response) {
     const userId = parseInt(req.params.id);
-    this.UserService.delete(userId)
+    User.delete(userId)
       .then(_.partial(onSuccess, res))
       .catch(_.partial(onError, res, 'Erro ao excluir usuário'))
   }
