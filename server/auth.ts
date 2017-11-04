@@ -3,15 +3,19 @@ import { Strategy, ExtractJwt } from 'passport-jwt';
 import User from './modules/User/service';
 const config = require('./config/env/config')();
 
-export default function AuthConfig() {
-  const UserService = new User();
-  let opts = {
-    secretOrKey: config.secret,
-    jwtFromRequest: ExtractJwt.fromAuthHeaderWithScheme('JWT'),
-  };
+class Auth {
 
-  passport.use(new Strategy(opts, (jwtPayload, done) => {
-    UserService
+
+  config() {
+    const UserService = new User();
+
+    let opts = {
+      secretOrKey: config.secret,
+      jwtFromRequest: ExtractJwt.fromAuthHeaderWithScheme('JWT'),
+    };
+
+    passport.use(new Strategy(opts, (jwtPayload, done) => {
+      UserService
       .getById(jwtPayload.id)
       .then(user => {
         if(user) {
@@ -25,14 +29,14 @@ export default function AuthConfig() {
       .catch(error => {
         done(error, null)
       });
-  }));
+    }));
 
-  return {
-    initialize: () => {
-      return passport.initialize();
-    },
-    autenticate: () => {
-      return passport.authenticate('jwt', {session: false});
+    return {
+      initialize: () => passport.initialize(),
+      autenticate: () => passport.authenticate('jwt', {session: false})
     }
   }
+
 }
+
+export default new Auth();

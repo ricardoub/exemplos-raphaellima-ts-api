@@ -16,15 +16,15 @@ class Routes {
     // app.route('/').get((req: Request, res: Response) => res.send('Hello, world!'));
     // app.route('/ola/:nome').get((req: Request, res: Response) => res.send(`Hello, ${req.params.nome}!`));
     app.route('/api/users/all')
-      .all(auth.autenticate()).get(this.router.index);
+      .all(auth.config().autenticate()).get(this.router.index);
     app.route('/api/users/create')
-      .all(auth.autenticate()).post(this.router.create);
+      .all(auth.config().autenticate()).post(this.router.create);
     app.route('/api/users/:id')
-      .all(auth.autenticate()).get(this.router.findOne);
+      .all(auth.config().autenticate()).get(this.router.findOne);
     app.route('/api/users/:id/update')
-      .all(auth.autenticate()).put(this.router.update);
+      .all(auth.config().autenticate()).put(this.router.update);
     app.route('/api/users/:id/destroy')
-      .all(auth.autenticate()).delete(this.router.destroy);
+      .all(auth.config().autenticate()).delete(this.router.destroy);
 
     app.route('/token').post(this.tokenRoute.auth);
   }
