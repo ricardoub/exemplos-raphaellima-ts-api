@@ -1,7 +1,6 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-var HTTPStatus = require("http-status");
-function onSuccess(res, data) {
-    res.status(HTTPStatus.OK).json({ payload: data });
-}
-exports.onSuccess = onSuccess;
+// import { Response } from 'express';
+// import * as HTTPStatus from 'http-status';
+//
+// export function onSuccess(res: Response, data: any) {
+//   res.status(HTTPStatus.OK).json({ payload: data })
+// }

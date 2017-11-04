@@ -1,7 +1,6 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-var HttpStatus = require("http-status");
-function authFail(req, res) {
-    res.sendStatus(HttpStatus.UNAUTHORIZED);
-}
-exports.default = authFail;
+// import { Request, Response } from 'express';
+// import * as HttpStatus from 'http-status';
+//
+// export default function authFail(req: Request, res: Response) {
+//   res.sendStatus(HttpStatus.UNAUTHORIZED);
+// }
