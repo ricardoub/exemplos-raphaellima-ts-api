@@ -157,7 +157,7 @@ describe('Testes de integração', () => {
         .delete(`/api/users/${1}/destroy`)
         .set('Content-Type', 'application/json')
         .set('Authorization', `JWT ${token}`)
-u                 .end((error, res) => {
+        .end((error, res) => {
           expect(res.status).to.equal(HTTPStatus.OK);
           expect(res.body.payload).to.eql(1);
           done(error);

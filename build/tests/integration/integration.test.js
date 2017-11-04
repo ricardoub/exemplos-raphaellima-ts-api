@@ -143,8 +143,8 @@ describe('Testes de integração', function () {
             helpers_1.request(helpers_1.app)
                 .delete("/api/users/" + 1 + "/destroy")
                 .set('Content-Type', 'application/json')
-                .set('Authorization', "JWT " + token);
-            u.end(function (error, res) {
+                .set('Authorization', "JWT " + token)
+                .end(function (error, res) {
                 helpers_1.expect(res.status).to.equal(HTTPStatus.OK);
                 helpers_1.expect(res.body.payload).to.eql(1);
                 done(error);
