@@ -38,4 +38,4 @@ var UserController = (function () {
     };
     return UserController;
 }());
-exports.default = UserController;
+exports.default = new UserController();
