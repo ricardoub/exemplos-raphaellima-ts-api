@@ -5,11 +5,10 @@ import TokenRoutes from '../../modules/auth/auth';
 class Routes {
 
   private router: UserRoutes;
-  private tokenRoute;
 
   constructor() {
     this.router = new UserRoutes();
-    this.tokenRoute = new TokenRoutes();
+    this.tokenRoute = TokenRoutes;
   }
 
   initRoutes(app: Application, auth: any): void {

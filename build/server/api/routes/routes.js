@@ -5,7 +5,7 @@ var auth_1 = require("../../modules/auth/auth");
 var Routes = (function () {
     function Routes() {
         this.router = new routes_1.default();
-        this.tokenRoute = new auth_1.default();
+        this.tokenRoute = auth_1.default;
     }
     Routes.prototype.initRoutes = function (app, auth) {
         // app.route('/').get((req: Request, res: Response) => res.send('Hello, world!'));
