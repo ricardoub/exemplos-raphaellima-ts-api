@@ -17,8 +17,8 @@ describe('Testes de integração', function () {
     };
     var userDefault = {
         id: 1,
-        name: 'Raphael',
-        email: 'raphael@email.com',
+        name: 'Ricardo',
+        email: 'ricardoub@gmail.com',
         password: '123'
     };
     beforeEach(function (done) {

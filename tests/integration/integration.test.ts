@@ -1,4 +1,4 @@
-import * as jwt from "jwt-simple";
+import * as jwt from 'jwt-simple';
 import * as HTTPStatus from 'http-status';
 import { app, request, expect } from './config/helpers';
 
@@ -20,8 +20,8 @@ describe('Testes de integração', () => {
 
   const userDefault = {
     id: 1,
-    name: 'Raphael',
-    email: 'raphael@email.com',
+    name: 'Ricardo',
+    email: 'ricardoub@gmail.com',
     password: '123'
   }
 
