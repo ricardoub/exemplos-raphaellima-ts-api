@@ -46,3 +46,4 @@ export default function (sequelize, DataTypes) {
   return User;
 
 }
+// seçao 9 - aula 95

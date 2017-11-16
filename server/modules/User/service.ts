@@ -53,3 +53,4 @@ class User implements IUser {
 }
 
 export default new User();
+// seçao 9 - aula 95
