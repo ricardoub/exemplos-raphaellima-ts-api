@@ -4,18 +4,10 @@ import TokenRoutes from '../../modules/auth/auth';
 
 class Routes {
 
-  private router: UserRoutes;
-  private tokenRoute;
-  private auth;
-
-  constructor(app: Application, auth: any) {
-    this.router = new UserRoutes();
-    this.tokenRoute = new TokenRoutes();
-    this.auth = auth;
-    this.getRoutes(app);
+  constructor() {
   }
 
-  getRoutes(app: Application): void {
+  initRoutes(app: Application, auth: any): void {
     // app.route('/').get((req: Request, res: Response) => res.send('Hello, world!'));
     // app.route('/ola/:nome').get((req: Request, res: Response) => res.send(`Hello, ${req.params.nome}!`));
     app.route('/api/users/all')
@@ -34,4 +26,4 @@ class Routes {
 
 }
 
-export default Routes;
+export default new Routes();

@@ -29,7 +29,9 @@ var User = (function () {
     User.prototype.update = function (id, user) {
         return model.User.update(user, {
             where: { id: id },
-            fields: ['name', 'email', 'password']
+            fields: ['name', 'email', 'password'],
+            hooks: true,
+            individualsHooks: true
         });
     };
     User.prototype.delete = function (id) {
@@ -39,4 +41,4 @@ var User = (function () {
     };
     return User;
 }());
-exports.default = User;
+exports.default = new User();

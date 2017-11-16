@@ -39,7 +39,9 @@ class User implements IUser {
   update(id: number, user: any){
     return model.User.update(user, {
       where: {id},
-      fields: ['name', 'email', 'password']
+      fields: ['name', 'email', 'password'],
+      hooks: true,
+      individualsHooks: true
     });
   }
 
@@ -50,4 +52,4 @@ class User implements IUser {
   }
 }
 
-export default User;
+export default new User();

@@ -36,10 +36,42 @@ describe('Testes de integração', function () {
             });
         });
     });
+    describe('POST /token', function () {
+        it('Deve receber um JWT', function (done) {
+            var credentials = {
+                email: userDefault.email,
+                password: userDefault.password
+            };
+            helpers_1.request(helpers_1.app)
+                .post('/token')
+                .send(credentials)
+                .end(function (error, res) {
+                helpers_1.expect(res.status).to.equal(HTTPStatus.OK);
+                helpers_1.expect(res.body.token).to.equal("" + token);
+                done(error);
+            });
+        });
+        it('Não deve gerar Token', function (done) {
+            var credentials = {
+                email: 'invalido@email.com',
+                password: 'invalido'
+            };
+            helpers_1.request(helpers_1.app)
+                .post('/token')
+                .send(credentials)
+                .end(function (error, res) {
+                helpers_1.expect(res.status).to.equal(HTTPStatus.UNAUTHORIZED);
+                helpers_1.expect(res.body).to.empty;
+                done(error);
+            });
+        });
+    });
     describe('GET /api/users/all', function () {
         it('Deve retornar um Array com todos os usuários', function (done) {
             helpers_1.request(helpers_1.app)
                 .get('/api/users/all')
+                .set('Content-Type', 'application/json')
+                .set('Authorization', "JWT " + token)
                 .end(function (error, res) {
                 helpers_1.expect(res.status).to.equal(HTTPStatus.OK);
                 helpers_1.expect(res.body.payload).to.be.an('array');
@@ -53,6 +85,8 @@ describe('Testes de integração', function () {
         it('Deve retornar um Array com apenas um usuário', function (done) {
             helpers_1.request(helpers_1.app)
                 .get("/api/users/" + userDefault.id)
+                .set('Content-Type', 'application/json')
+                .set('Authorization', "JWT " + token)
                 .end(function (error, res) {
                 helpers_1.expect(res.status).to.equal(HTTPStatus.OK);
                 helpers_1.expect(res.body.payload.id).to.be.equal(userDefault.id);
@@ -74,6 +108,8 @@ describe('Testes de integração', function () {
             };
             helpers_1.request(helpers_1.app)
                 .post("/api/users/create")
+                .set('Content-Type', 'application/json')
+                .set('Authorization', "JWT " + token)
                 .send(user)
                 .end(function (error, res) {
                 helpers_1.expect(res.status).to.equal(HTTPStatus.OK);
@@ -92,6 +128,8 @@ describe('Testes de integração', function () {
             };
             helpers_1.request(helpers_1.app)
                 .put("/api/users/" + userTest.id + "/update")
+                .set('Content-Type', 'application/json')
+                .set('Authorization', "JWT " + token)
                 .send(user)
                 .end(function (error, res) {
                 helpers_1.expect(res.status).to.equal(HTTPStatus.OK);
@@ -104,6 +142,8 @@ describe('Testes de integração', function () {
         it('Deve deletar um usuário', function (done) {
             helpers_1.request(helpers_1.app)
                 .delete("/api/users/" + 1 + "/destroy")
+                .set('Content-Type', 'application/json')
+                .set('Authorization', "JWT " + token)
                 .end(function (error, res) {
                 helpers_1.expect(res.status).to.equal(HTTPStatus.OK);
                 helpers_1.expect(res.body.payload).to.eql(1);
