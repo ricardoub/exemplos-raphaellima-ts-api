@@ -29,3 +29,4 @@ npm i @types/jwt-simple @types/passport @types/passport-jwt -D
 npm i bcrypt -S
 npm i istanbul nyc -D
 ```
+Estamos enfrentando problema 
