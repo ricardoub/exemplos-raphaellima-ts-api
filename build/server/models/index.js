@@ -3,9 +3,11 @@ var fs = require('fs');
 var path = require('path');
 var Sequelize = require('sequelize');
 var basename = path.basename(__filename);
-var config = require('../config/env/config.js')();
+var config = require('../config/env/config')();
 var env = config.env || 'development';
 var db = {};
+//var config = require('../config/env/config.js')();
+//var config = require('../config/env/config')();
 if (config.dbURL) {
     var sequelize = new Sequelize(config.dbURL);
 }
