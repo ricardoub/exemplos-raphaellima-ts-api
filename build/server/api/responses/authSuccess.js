@@ -11,7 +11,7 @@ function authSuccess(res, credentials, data) {
         });
     }
     else {
-        res.sendStatus(httpStatus.UNAUTHORIZED);
+        res.status(httpStatus.UNAUTHORIZED);
     }
 }
 exports.default = authSuccess;
